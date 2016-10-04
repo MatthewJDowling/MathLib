@@ -1,5 +1,6 @@
 #include "Test.h"
 #include <cmath>
+//feature vector branch
 int doNothing(int x)
 {
 	return x*x + 2*x + 5;
@@ -40,5 +41,5 @@ float quadsub(float a, float b, float c)
 
 float lerp(float s, float t, float e)
 {
-	s + t*(e - s);
+	return s + t*(e - s);
 }
