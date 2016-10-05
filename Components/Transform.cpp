@@ -3,9 +3,13 @@
 
 
 
-Transform::Transform(float x, float y, float w, float h, float a) :position{ x, y}, scale{w,h}, facing {a}
+Transform::Transform(float x, float y, float w, float h, float a)
 {
-	facing = 0;
+	position.x = x;
+	position.y = y;
+
+	scale.x = w;
+	scale.y = h;
 }
 
 vec2 Transform::getDirection()
@@ -18,17 +22,41 @@ void Transform::setDirection(const vec2 &dir)
 	facing = angle(dir);
 }
 
+void Transform::debugUpdate()
+{
+	if (position.x < 0)
+	{
+		position.x = 800; 
+	}
+	else if (position.x > 800)
+	{
+		position.x = 0;
+	}
+
+	if (position.y < 0)
+	{
+		position.y = 800;
+	}
+	else if (position.y > 800)
+	{
+		position.y = 0;
+	}
+}
+
 void Transform::debugDraw()
 {
-	sfw::drawCircle(position.x, position.y, 12);
+	sfw::drawCircle(position.x, position.y, 12,12, WHITE);
 
-	vec2 dirEnd = position + getDirection()* 24;
-	vec2 upEnd = position + perp(getDirection()) *scale.y * 4;
-	sfw::drawLine(position.x, position.y, dirEnd.x, dirEnd.y, RED);
-	sfw::drawLine(position.x, position.y, upEnd.x, upEnd.y, GREEN);
+	vec2 dirEnd = position + getDirection() * scale.x * 60;
+	vec2 upEnd = position + perp(getDirection()) *scale.y * 45;
+
+
+	sfw::drawLine(position.x, position.y, dirEnd.x, dirEnd.y, BLUE);
+	sfw::drawLine(position.x, position.y, upEnd.x, upEnd.y, BLACK);
 	
 	
 	
 		
 	
 }
+

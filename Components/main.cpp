@@ -1,29 +1,51 @@
 #include "sfwdraw.h"
 #include "flops.h"
 #include "vec2.h"
-
-
+#include "Transform.h"
+#include "RigidBody.h"
+#include "spaceShipLocomotion.h"
 void main()
 {
-	sfw::initContext(800, 800);
-	float steps = 100;
+	float H = 800;
+	float W = 800;
+	sfw::initContext(W,H);
+	
+
+	Transform playerTransform(400,400);
+	Rigidbody playerRigidbody;
+	playerRigidbody.velocity = vec2{ 0, 0 };
+	
+
+	SpaceShipLocomotion playerLoco;
 	while (sfw::stepContext())
 	{
-		for (int i = 0; i < steps; i++)
+		float deltaTime = sfw::getDeltaTime();
+	
+		playerLoco.update(playerRigidbody, deltaTime);
+		playerRigidbody.integrate(playerTransform, deltaTime);
+
+		playerTransform.debugDraw();
+
+		if (playerTransform.position.x < 0)
 		{
-			float x1 = i / steps;
-			float x2 = (i + 1) / steps;
-
-			float y1 = quadBezier(.5f, 0, 1, x1);
-			float y2 = quadBezier(.5f, 0, 1, x2);
-
-			x1 *= 400;
-			x2 *= 400;
-			y1 *= 400;
-			y2 *= 400;
-
-			sfw::drawLine(x1, y1, x2, y2);
+			playerTransform.position.x = 800;
 		}
+
+		else if (playerTransform.position.x > 800)
+		{
+			playerTransform.position.x = 0;
+		}
+
+		if (playerTransform.position.y < 0)
+		{
+			playerTransform.position.y = 800;
+		}
+
+		else if (playerTransform.position.y > 800)
+		{
+			playerTransform.position.y = 0;
+		}
+		
 	}
 	sfw::termContext();
 }

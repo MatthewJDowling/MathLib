@@ -12,6 +12,6 @@ public:
 	
 	vec2 getDirection();
 	void setDirection(const vec2 &dir);
-	
+	void debugUpdate();
 	void debugDraw();
 };

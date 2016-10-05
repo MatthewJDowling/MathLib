@@ -85,39 +85,39 @@ float hermiteSpline(float start, float s_tan, float en, float e_tan, float alpha
 
 }
 
-float cardinalSpline(float start, float mid, float end,float a,float alpha)
-{
-	float tangent0 = (mid - start)* a;
-	float tangent1 = (end - mid) * a;
-	
-	float tsq = alpha * alpha; 
-	float tcub = tsq * alpha;
-
-	float h00 = 2 * tcub - 3 * tsq + 1;
-	float h01 = -2 * tcub + 3 * tsq;
-	float h10 = tcub - 2 * tsq + alpha; 
-	float h11 = tcub - tsq; 
-
-	float point = h00 *start + h10 * tangent0 + h01 * point;
-		return point;
-}
-
-float kittySpline(float start, float mid, float end, float alpha)
-{
-	float tangent0 = (mid - start)* .5;
-	float tangent1 = (end - mid) * .5;
-
-	float tsq = alpha * alpha;
-	float tcub = tsq * alpha;
-
-	float h00 = 2 * tcub - 3 * tsq + 1;
-	float h01 = -2 * tcub + 3 * tsq;
-	float h10 = tcub - 2 * tsq + alpha;
-	float h11 = tcub - tsq;
-
-	float point = h00 *start + h10 * tangent0 + h01 * point;
-	return point;
-}
+//float cardinalSpline(float start, float mid, float end,float a,float alpha)
+//{
+//	float tangent0 = (mid - start)* a;
+//	float tangent1 = (end - mid) * a;
+//	
+//	float tsq = alpha * alpha; 
+//	float tcub = tsq * alpha;
+//
+//	float h00 = 2 * tcub - 3 * tsq + 1;
+//	float h01 = -2 * tcub + 3 * tsq;
+//	float h10 = tcub - 2 * tsq + alpha; 
+//	float h11 = tcub - tsq; 
+//
+//	float point = h00 *start + h10 * tangent0 + h01 * point;
+//		return point;
+//}
+//
+//float kittySpline(float start, float mid, float end, float alpha)
+//{
+//	float tangent0 = (mid - start)* .5;
+//	float tangent1 = (end - mid) * .5;
+//
+//	float tsq = alpha * alpha;
+//	float tcub = tsq * alpha;
+//
+//	float h00 = 2 * tcub - 3 * tsq + 1;
+//	float h01 = -2 * tcub + 3 * tsq;
+//	float h10 = tcub - 2 * tsq + alpha;
+//	float h11 = tcub - tsq;
+//
+//	float point = h00 *start + h10 * tangent0 + h01 * point;
+//	return point;
+//}
 
 
 
