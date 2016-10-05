@@ -10,7 +10,7 @@ public:
 	vec2 scale;
 	float facing; 
 	
-	vec2 getDirection();
+	vec2 getDirection() const;
 	void setDirection(const vec2 &dir);
 	void debugUpdate();
 	void debugDraw();

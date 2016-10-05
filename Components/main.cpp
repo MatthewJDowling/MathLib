@@ -4,6 +4,8 @@
 #include "Transform.h"
 #include "RigidBody.h"
 #include "spaceShipLocomotion.h"
+#include "SpaceshipController.h"
+
 void main()
 {
 	float H = 800;
@@ -15,16 +17,16 @@ void main()
 	Rigidbody playerRigidbody;
 	playerRigidbody.velocity = vec2{ 0, 0 };
 	
-
+	SpaceshipController spacectrl;
 	SpaceShipLocomotion playerLoco;
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
-	
-		playerLoco.update(playerRigidbody, deltaTime);
 		playerRigidbody.integrate(playerTransform, deltaTime);
-
 		playerTransform.debugDraw();
+		spacectrl.update(playerLoco);
+		playerLoco.update(playerTransform, playerRigidbody, deltaTime);
+		playerRigidbody.debugDraw(playerTransform);
 
 		if (playerTransform.position.x < 0)
 		{
