@@ -39,7 +39,3 @@ float quadsub(float a, float b, float c)
 	}; 
 }
 
-float lerp(float s, float t, float e)
-{
-	return s + t*(e - s);
-}

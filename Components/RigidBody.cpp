@@ -58,6 +58,6 @@ void Rigidbody::debugDraw(const Transform & trans)
 	vec2 v = p + velocity; 
 	vec2 a = acceleration + p;
 
-	sfw::drawLine(p.x, p.y, v.x, v.y, CYAN);
-	sfw::drawLine(p.x, p.y, a.x, a.y, MAGENTA);
+	sfw::drawLine(p.x, p.y, v.x, v.y, RED);
+	sfw::drawLine(p.x, p.y, a.x, a.y, RED);
 }

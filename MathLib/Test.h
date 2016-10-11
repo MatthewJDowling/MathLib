@@ -16,7 +16,7 @@ float quadsub(float a, float b, float c);
 
 
 //problem b
-float lerp(float start, float end, float t);
+
 
 //problem c
 struct Point { float x, y; };

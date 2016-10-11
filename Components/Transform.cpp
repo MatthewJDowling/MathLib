@@ -46,13 +46,13 @@ void Transform::debugUpdate()
 
 void Transform::debugDraw()
 {
-	sfw::drawCircle(position.x, position.y, 12,12, WHITE);
+	sfw::drawCircle(position.x, position.y, 12,12, RED);
 
 	vec2 dirEnd = position + getDirection() * scale.x * 60;
 	vec2 upEnd = position + perp(getDirection()) *scale.y * 45;
 
 
-	sfw::drawLine(position.x, position.y, dirEnd.x, dirEnd.y, BLUE);
+	sfw::drawLine(position.x, position.y, dirEnd.x, dirEnd.y, BLACK);
 	sfw::drawLine(position.x, position.y, upEnd.x, upEnd.y, BLACK);
 	
 	

@@ -1,6 +1,7 @@
 #include "vec2.h"
 #include <cmath>
 #include "flops.h"
+
 vec2 operator+(const vec2 & lhs, const vec2 & rhs) //Component Additions
 {
 	return vec2{ lhs.x + rhs.x, lhs.y + rhs.y };
@@ -92,4 +93,14 @@ vec2 fromAngle(float a)
 float angle(const vec2 & v)
 {
 	return atan2f(v.y, v.x);
+}
+
+float vec2::operator[](unsigned idx) const
+{
+	return v[idx];
+}
+
+float & vec2::operator[](unsigned idx)
+{
+	return v[idx];
 }
