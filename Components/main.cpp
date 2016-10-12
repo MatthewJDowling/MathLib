@@ -28,24 +28,24 @@ void main()
 		playerLoco.update(playerTransform, playerRigidbody, deltaTime);
 		playerRigidbody.debugDraw(playerTransform);
 
-		if (playerTransform.position.x < 0)
+		if (playerTransform.m_position.x < 0)
 		{
-			playerTransform.position.x = 800;
+			playerTransform.m_position.x = 800;
 		}
 
-		else if (playerTransform.position.x > 800)
+		else if (playerTransform.m_position.x > 800)
 		{
-			playerTransform.position.x = 0;
+			playerTransform.m_position.x = 0;
 		}
 
-		if (playerTransform.position.y < 0)
+		if (playerTransform.m_position.y < 0)
 		{
-			playerTransform.position.y = 800;
+			playerTransform.m_position.y = 800;
 		}
 
-		else if (playerTransform.position.y > 800)
+		else if (playerTransform.m_position.y > 800)
 		{
-			playerTransform.position.y = 0;
+			playerTransform.m_position.y = 0;
 		}
 		
 	}

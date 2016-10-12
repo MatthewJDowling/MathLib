@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClInclude Include="flops.h" />
     <ClInclude Include="mat2.h" />
+    <ClInclude Include="mat3.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="vec2.h" />
     <ClInclude Include="vec3.h" />
@@ -119,8 +120,10 @@
   <ItemGroup>
     <ClCompile Include="flops.cpp" />
     <ClCompile Include="mat2.cpp" />
+    <ClCompile Include="mat3.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="vec2.cpp" />
+    <ClCompile Include="vec3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

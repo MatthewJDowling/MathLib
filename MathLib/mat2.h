@@ -36,10 +36,7 @@
 
 
 
-//mat2 * mat2
-//mat2 * vec2 
-//mat2 * float
 
-//mat2 + mat2
-//mat2 - mat2
-//-mat
+
+
+

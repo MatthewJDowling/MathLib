@@ -1,6 +1,19 @@
 #include "mat2.h"
 #include "flops.h"
 
+
+
+vec2 mat2::operator[](unsigned idx) const
+{
+	return c[idx];
+}
+
+vec2 mat2::operator[](unsigned idx)
+{
+	return c[idx];
+}
+
+
 bool operator == (const mat2 & A, const mat2 & B)
 {
 	return fequals(A.m[0], B.m[0]) &&
