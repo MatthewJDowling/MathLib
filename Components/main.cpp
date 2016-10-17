@@ -15,7 +15,7 @@ void main()
 
 	Transform playerTransform(400,400);
 	Rigidbody playerRigidbody;
-	playerRigidbody.velocity = vec2{ 0, 0 };
+	playerRigidbody.velocity = vec2{ 0,0 };
 	
 	SpaceshipController spacectrl;
 	SpaceShipLocomotion playerLoco;

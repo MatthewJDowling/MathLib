@@ -113,9 +113,9 @@ mat3 operator * (const mat3 & A, const float & B)
 
 vec3 operator * (const mat3 & A, const vec3 & B)
 {
-	return vec3{ (A.m[0] * B.x) + (A.m[1] * B.y) + (A.m[2] * B.z),
-				 (A.m[3] * B.x) + (A.m[4] * B.y) + (A.m[5] * B.z),
-				 (A.m[6] * B.x) + (A.m[7] * B.y) + (A.m[8] * B.z) };
+	return vec3{ (A.m[0] * B.x) + (A.m[3] * B.y) + (A.m[6] * B.z),
+				 (A.m[1] * B.x) + (A.m[4] * B.y) + (A.m[7] * B.z),
+				 (A.m[2] * B.x) + (A.m[5] * B.y) + (A.m[8] * B.z) };
 		
 }
 
@@ -184,10 +184,10 @@ mat3 translate(float x, float y)
 	retval[2][0] = a;
 	retval[2][1] = b;
 	return retval;*/
-	return mat3{ {1,0,x,0,1,y,0,0,1} };
+	return mat3{ {1,0,0,0,1,0,x,y,1} };
 }
 
 mat3 rotate(float a)
 {
-	return mat3{ { cos(a), -sin(a), 0, sin(a), cos(a), 0, 0,0,1 } };
+	return mat3{ { cos(a), sin(a), 0, -sin(a), cos(a), 0, 0,0,1 } };
 }

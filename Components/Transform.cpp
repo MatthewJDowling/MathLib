@@ -52,15 +52,16 @@ void Transform::debugUpdate()
 	}
 }
 
-void Transform::debugDraw() const 
+void Transform::debugDraw(const mat3 &T) const 
 {
-	sfw::drawCircle(m_position.x, m_position.y, 12,12, RED);
+	
 
-	mat3 L = getLocalTransform();
+	mat3 L = T * getLocalTransform();
 
-	vec3 pos = vec3{ m_position.x, m_position.y,0 };
-	vec3 right = pos + L * vec3{ 7,0,0 };
-	vec3 up =    pos + L * vec3{ 0,7,0 };
+	vec3 pos = L[2];
+
+	vec3 right =  L * vec3{ 7,0,1 };
+	vec3 up =     L * vec3{ 0,7,1 };
 
 	//vec2 dirEnd = m_position + getDirection() * m_scale.x * 60;
 	//vec2 upEnd = m_position + perp(getDirection()) *m_scale.y * 45;
@@ -68,5 +69,7 @@ void Transform::debugDraw() const
 
 	sfw::drawLine(m_position.x, m_position.y, right.x, right.y, CYAN);
 	sfw::drawLine(m_position.x, m_position.y, up.x, up.y, GREEN);
+
+	sfw::drawCircle(m_position.x, m_position.y, 12, 12, RED);
 }
 
