@@ -189,5 +189,7 @@ mat3 translate(float x, float y)
 
 mat3 rotate(float a)
 {
-	return mat3{ { cos(a), sin(a), 0, -sin(a), cos(a), 0, 0,0,1 } };
+	return mat3{ { cos(a), sin(a), 0,
+					-sin(a), cos(a), 0, 
+						0,0,1 } };
 }

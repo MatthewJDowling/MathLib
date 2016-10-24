@@ -23,7 +23,7 @@ int main()
 
 
 	//change
-	assert(fequals(angleBetween(vec2{ 0,1 }, vec2{ 1,0 }), deg2rad(90)));
+	/*assert(fequals(angleBetween(vec2{ 0,1 }, vec2{ 1,0 }), deg2rad(90)));
 
 	assert(fequals(angleBetween(vec2{ 1,1 }, vec2{ 0,1 }), deg2rad(45)));
 
@@ -34,16 +34,35 @@ int main()
 
 	assert(fequals(quadBezier(15, 40, 21, 0), 15));
 	assert(fequals(quadBezier(15, 40, 21, 1), 21));
-
+*/
 	///////////////////////////////////////////////////////////////////////////////////
 
-	vec3 test
-		= rotate(deg2rad(-90)) * translate(10, 0) *
-		rotate(deg2rad(45))* translate(4, 0) *
-		rotate(deg2rad(45))*translate(-6, 0) *
-		translate(6, 4)		* vec3 { 0, 0, 1 };
+	//vec3 test
+	//	= rotate(deg2rad(-90)) * translate(10, 0) *
+	//	rotate(deg2rad(45))* translate(4, 0) *
+	//	rotate(deg2rad(45))*translate(-6, 0) *
+	//	translate(6, 4)		* vec3 { 0, 0, 1 };
 
-	assert((test == vec3{ 2 * sqrtf(2), -6 - 2 * sqrtf(2), 1 }));
+	//assert((test == vec3{ 2 * sqrtf(2), -6 - 2 * sqrtf(2), 1 }));
+	
+
+	vec2 WP[8] = { {12,-8},{15,18},{5,8},{-22,-5}, {4,-2}, {-6,9},{18,88},{-22,90} };
+	mat3 RES = mat3Identity();
+	for (int i = 0; i < 7; ++i)
+	{
+		vec2 bet = WP[i + 1] - WP[i];
+		
+		mat3 R = rotate(angle(bet) - angle(RES[0].xy));
+		
+
+		mat3 T = translate(magnitude(bet), 0);
+
+		RES = RES * R * T ;
+
+		assert((RES[2].xy == WP[i + 1]));
+	}
+
+	
 
 	return 0;
 }

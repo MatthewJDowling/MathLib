@@ -1,5 +1,6 @@
 #include "Test.h"
 #include <cmath>
+#include "vec2.h"
 //feature vector branch
 int doNothing(int x)
 {
@@ -37,5 +38,19 @@ float quadsub(float a, float b, float c)
 	{
 		return 0;
 	}; 
+
+}
+
+float distance(vec2 first, vec2 second)
+{
+
+
+	// TODO: how to square root?!!!
+	float distancex = (second.x - first.x) * (second.x - first.x);
+	float distancey = (second.y - first.y) * (second.y - first.y);
+
+	double findDistance = sqrt(distancex + distancey);
+
+	return findDistance;
 }
 

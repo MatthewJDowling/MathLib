@@ -92,7 +92,7 @@ vec2 fromAngle(float a)
 // cmath has a function : atan2f(y,x)
 float angle(const vec2 & v)
 {
-	return atan2f(v.y, v.x);
+	return atan2f(v.x, v.y);
 }
 
 float vec2::operator[](unsigned idx) const

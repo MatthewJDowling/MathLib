@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include "vec2.h"
 int doNothing(int x);
 
 float test_quad(float x);
@@ -20,7 +20,8 @@ float quadsub(float a, float b, float c);
 
 //problem c
 struct Point { float x, y; };
-float distance(Point P1, Point P2);
-float distance(float x1, float y1, float x2, float y2);
+//float distance(Point P1, Point P2);
+//float distance(float x1, float y1, float x2, float y2);
+float distance(vec2 first, vec2 second);
 
 
