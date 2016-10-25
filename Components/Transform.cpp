@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "sfwdraw.h"
+#include "shapeDraw.h"
 
 
 
@@ -100,8 +101,9 @@ void Transform::debugDraw(const mat3 &T) const
 	
 
 
-	
+	drawCircle(L * Circle{ 0,0, 5 }, 0x88888FF);
 	//sfw::drawLine(sgp.x, sgp.y, pos.x, pos.y, BLUE);
 	sfw::drawCircle(pos.x, pos.y, size, 12, color);
+	drawAABB(AABB{ 0,0,10,10 },RED);
 }
 

@@ -6,6 +6,7 @@
 #include <vec2.h>
 #include <vec3.h>
 #include <mat3.h>
+#include "shapes.h"
 // All of my reeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 int main()
 {
@@ -46,23 +47,43 @@ int main()
 	//assert((test == vec3{ 2 * sqrtf(2), -6 - 2 * sqrtf(2), 1 }));
 	
 
-	vec2 WP[8] = { {12,-8},{15,18},{5,8},{-22,-5}, {4,-2}, {-6,9},{18,88},{-22,90} };
-	mat3 RES = mat3Identity();
-	for (int i = 0; i < 7; ++i)
-	{
-		vec2 bet = WP[i + 1] - WP[i];
-		
-		mat3 R = rotate(angle(bet) - angle(RES[0].xy));
-		
+	//vec2 WP[8] = { {12,-8},{15,18},{5,8},{-22,-5}, {4,-2}, {-6,9},{18,88},{-22,90} };
+	//mat3 RES = mat3Identity();
+	//for (int i = 0; i < 7; ++i)
+	//{
+	//	vec2 bet = WP[i + 1] - WP[i];
+	//	
+	//	mat3 R = rotate(angle(bet) - angle(RES[0].xy));
+	//	
 
-		mat3 T = translate(magnitude(bet), 0);
+	//	mat3 T = translate(magnitude(bet), 0);
 
-		RES = RES * R * T ;
+	//	RES = RES * R * T ;
 
-		assert((RES[2].xy == WP[i + 1]));
-	}
+	//	assert((RES[2].xy == WP[i + 1]));
+	//}
 
+
+	/*Circle c = { 0, 0, 5 };
+
+
+	assert((translate(4, 0) * c == Circle{ 4, 0, 5 }));
 	
 
+	assert((scale(2, 1) * c == Circle{ 4, 0, 10 }));
+	assert((scale(2, 2) * c == Circle{ 4, 0, 10 }));
+	assert((scale(1, 2) * c == Circle{ 4, 0, 10 }));
+
+	assert((scale(-1, 1) * c == Circle{ 0, 0, 5 }));
+	
+	assert((rotate(45) * c == Circle{ 0, 0, 5 }));
+*/
+	AABB testA = { 1,2,3,4 };
+
+	assert((testA.min() == vec2{ -2,-2 }));
+	assert((testA.max() == vec2{ 4,6 }));
+	getchar();
 	return 0;
+
+	
 }

@@ -17,7 +17,7 @@ void main()
 	float W = 800;
 	sfw::initContext(W,H);
 	
-	SpaceshipController spacectrl('A', 'D', 'W', 'S', ' ');
+	SpaceshipController spacectrl('A', 'W', 'D', 'S', ' ');
 
 	Transform playerTransform(400,400);
 	Transform sunTransform(0,0,20,YELLOW);
