@@ -49,3 +49,10 @@ vec2 fromAngle(float a);
 // a = arctan(Y/X)
 // cmath has a function : atan2f(y,x)
 float angle(const vec2 &v);
+
+
+vec2 lerp(const vec2 &start, const vec2 &end, float alpha);
+
+
+vec2 min(const vec2 &A, const vec2 &B);
+vec2 max(const vec2 &A, const vec2 &B);

@@ -104,3 +104,27 @@ float & vec2::operator[](unsigned idx)
 {
 	return v[idx];
 }
+
+vec2 lerp(const vec2 &start, const vec2 &end, float alpha)
+{
+	vec2 retval; 
+	retval.x = lerp(start.x, end.x, alpha);
+	retval.y = lerp(start.y, end.y, alpha);
+	return retval; 
+}
+
+vec2 min(const vec2 & A, const vec2 & B)
+{
+	return vec2
+	{
+	A.x < B.x ? A.x : B.x,
+	A.y < B.y ? A.y : B.y};
+}
+
+vec2 max(const vec2 & A, const vec2 & B)
+{
+	return vec2
+	{
+		A.x > B.x ? A.x : B.x,
+		A.y > B.y ? A.y : B.y };
+}

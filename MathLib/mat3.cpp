@@ -1,12 +1,15 @@
 #include "mat3.h"
 #include "flops.h"
-#include "cmath"
+#include <cmath>
+
+#include "vec3.h"
+
 vec3 mat3::operator[](unsigned idx) const
 {
 	return c[idx];
 }
 
-vec3 mat3::operator[](unsigned idx)
+vec3 &mat3::operator[](unsigned idx)
 {
 	return c[idx];
 }
@@ -54,7 +57,7 @@ mat3 transpose(const mat3 & A)
 	retVal.m[5] = A.m[7];
 	retVal.m[8] = A.m[8];
 
-	return A;
+	return retVal;
 	
 }
 
@@ -144,28 +147,13 @@ float determinant(const mat3 &A)
 mat3 inverse(const mat3 &A)
 {
 
-	float a = A.m[0];
-	float b = A.m[1];
-	float c = A.m[2];
-	float d = A.m[3];
-	float e = A.m[4];
-	float f = A.m[5];
-	float g = A.m[6];
-	float h = A.m[7];
-	float i = A.m[8];
+	mat3 retVal;
 
-	float Aa = determinant({ e,i,f,h });
-	float B = -determinant({ d,i,f,g });
-	float C = determinant({ d,h,e,g });
-	float D = -determinant({ b,i,c,h });
-	float E = determinant({ a,i,c,g });
-	float F = -determinant({ a,h,b,g });
-	float G = determinant({ b,f,c,e });
-	float H = -determinant({ a,f,c,d });
-	float I = determinant({ a,e,b,d });
+	retVal[0] = cross(A[1], A[2]);
+	retVal[1] = cross(A[2], A[0]);
+	retVal[2] = cross(A[0], A[1]);
 
-	return (1 / determinant(A)) * mat3 { Aa, B, C, D, E, F, G, H, I };
-
+	return 1 / determinant(A) * transpose(retVal);
 }
 
 mat3 scale(float w, float h)

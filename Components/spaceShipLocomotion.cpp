@@ -28,7 +28,7 @@ void SpaceShipLocomotion::doStop(float value)
 	stopAction += value;
 }
 
-void SpaceShipLocomotion::update(const Transform &trans, Rigidbody &rigidbody, float deltaTime)
+void SpaceShipLocomotion::update(const Transform &trans, Rigidbody &rigidbody)
 {
 	
 	rigidbody.addForce(trans.getDirection() * speed *vertThrust);

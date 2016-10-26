@@ -6,13 +6,13 @@ SpaceshipRenderer::SpaceshipRenderer()
 	color = MAGENTA;
 }
 
-void SpaceshipRenderer::draw(const mat3 & T, const Transform & ship)
+void SpaceshipRenderer::draw(const mat3 & Camera,const Transform & ship)
 {
-	mat3 glob = T * ship.getGlobalTransform();
+	mat3 glob = ship.getGlobalTransform();
 
-	vec3 F = glob *vec3{   0, 2, 1};
-	vec3 L = glob *vec3{  -1,-1, 1};
-	vec3 R = glob *vec3{   1,-1, 1};
+	vec3 F = Camera *glob *vec3{   5, 0, 1};
+	vec3 L = Camera *glob *vec3{  -1,2, 1};
+	vec3 R = Camera *glob *vec3{   -1,-2, 1};
 
 	sfw::drawLine(L.x, L.y, F.x, F.y, color);
 	sfw::drawLine(F.x, F.y, R.x, R.y, color);

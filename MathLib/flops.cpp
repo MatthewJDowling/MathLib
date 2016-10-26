@@ -1,5 +1,5 @@
 #include "flops.h"
-
+#include "vec2.h"
 #define _USE_MATH_DEFINES
 #include <cmath>
 
@@ -61,13 +61,13 @@ float parabFlip(float x)
 	return 0  ;
 }
 
-float quadBezier(float start, float mid, float end, float alpha)
-{
-	return
-	lerp(lerp(start,mid,alpha),
-	lerp(mid,end,alpha),alpha);
-
-}
+//float quadBezier(float start, float mid, float end, float alpha)
+//{
+//	return
+//	lerp(lerp(start,mid,alpha),
+//	lerp(mid,end,alpha),alpha);
+//
+//}
 
 float hermiteSpline(float start, float s_tan, float en, float e_tan, float alpha)
 {
@@ -125,6 +125,6 @@ float lerp(float start, float end, float alpha)
 {
 	return (1 - alpha) * start + (alpha)* end;
 
-	return alpha *(end - start) + start; 
+	
 }
 

@@ -9,7 +9,7 @@ union mat3
 	vec3 c[3];
 
 	vec3 operator[](unsigned idx) const;
-	vec3 operator[](unsigned idx);
+	vec3 &operator[](unsigned idx);
 };
 
 bool operator == (const mat3 & A, const mat3 & B);

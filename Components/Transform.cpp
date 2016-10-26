@@ -11,7 +11,7 @@ Transform::Transform(float x, float y, int a_size, unsigned int a_color)
 
 	size = a_size;
 
-	m_scale = { 12,12 };
+	m_scale = { 1, 1 };
 	m_facing = 0;
 	color = a_color;
 	m_parent = nullptr;
@@ -95,14 +95,14 @@ void Transform::debugDraw(const mat3 &T) const
 	vec3 pos = L[2];
 	vec3 sgp = m_parent ? m_parent->getGlobalTransform()[2] : pos;
 
-	vec3 right =  L * vec3{ 7,0,1 };
-	vec3 up =     L * vec3{ 0,7,1 };
+	vec3 up =  L * vec3{ 7,0,1 };
+	vec3 right =     L * vec3{ 0,7,1 };
 
 	
 
 
 	drawCircle(L * Circle{ 0,0, 5 }, 0x88888FF);
-	//sfw::drawLine(sgp.x, sgp.y, pos.x, pos.y, BLUE);
+	sfw::drawLine(sgp.x, sgp.y, pos.x, pos.y, BLUE);
 	sfw::drawCircle(pos.x, pos.y, size, 12, color);
 	drawAABB(AABB{ 0,0,10,10 },RED);
 }

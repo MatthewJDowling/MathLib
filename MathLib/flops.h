@@ -1,4 +1,5 @@
 #pragma once
+#include "vec2.h"
 
 bool fequals(float lhs, float rhs);
 

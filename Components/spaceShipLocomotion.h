@@ -21,6 +21,6 @@ public:
 	void doThrust(float);
 	void doTurn(float);
 
-	void update(const Transform &trans, Rigidbody &rigidbody, float deltaTime);
+	void update(const Transform &trans, Rigidbody &rigidbody);
 	void doStop(float value);
 };
