@@ -56,3 +56,20 @@ AABB operator*(const mat3 & T, const AABB & box)
 
 	return retval; 
 }
+
+Plane operator *(const mat3 & T, const Plane & P)
+{
+	Plane retval; 
+	retval.pos =
+		(T * vec3{ P.pos.x, P.pos.y,1 }).xy;
+
+	retval.dir =
+		normal(T * vec3{ P.dir.x, P.dir.y,0 }).xy;
+
+	return retval; 
+}
+
+bool operator==(const Plane &A, const Plane &B)
+{
+	return A.pos == B.pos && A.dir == B.dir;
+}

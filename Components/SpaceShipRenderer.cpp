@@ -1,6 +1,6 @@
 #include "SpaceShipRenderer.h"
 #include "sfwdraw.h"
-
+#include "shapeDraw.h"
 SpaceshipRenderer::SpaceshipRenderer()
 {
 	color = MAGENTA;
@@ -17,4 +17,7 @@ void SpaceshipRenderer::draw(const mat3 & Camera,const Transform & ship)
 	sfw::drawLine(L.x, L.y, F.x, F.y, color);
 	sfw::drawLine(F.x, F.y, R.x, R.y, color);
 	sfw::drawLine(R.x, R.y, L.x, L.y, color);
+	
+	
+
 }

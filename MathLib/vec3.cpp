@@ -93,3 +93,7 @@ vec3 cross(const vec3 & lhs, const vec3 & rhs)
 
 	return  rest;
 }
+vec3 normal(const vec3 & v)
+{
+	return v / magnitude(v);
+}

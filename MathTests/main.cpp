@@ -97,11 +97,18 @@ int main()
 	AABB A = { 0,0, 2,4 };
 	AABB B = { 2,2, 2,4 };
 
+	AABB C = { 0,0, 1,1 };
+	AABB D = { 10,0, 1,1 };
+
 	assert(boxCollision(A, B).penetrationDepth == 2);
 	assert((boxCollision(A, B).collisionNormal == vec2{ 1, 0 }));
 	assert((boxCollision(B, A).collisionNormal == vec2{ -1, 0 }));
+
+	assert(fequals(boxCollisionSwept(C, vec2{ 1,0 }, D, vec2{ -1,0 }).entryTime, 4));
+
 	getchar();
 	return 0;
+
 
 	
 }
