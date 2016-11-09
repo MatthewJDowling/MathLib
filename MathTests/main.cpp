@@ -37,47 +37,47 @@ int main()
 	assert(fequals(quadBezier(15, 40, 21, 0), 15));
 	assert(fequals(quadBezier(15, 40, 21, 1), 21));
 */
-	///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 
-	//vec3 test
-	//	= rotate(deg2rad(-90)) * translate(10, 0) *
-	//	rotate(deg2rad(45))* translate(4, 0) *
-	//	rotate(deg2rad(45))*translate(-6, 0) *
-	//	translate(6, 4)		* vec3 { 0, 0, 1 };
+//vec3 test
+//	= rotate(deg2rad(-90)) * translate(10, 0) *
+//	rotate(deg2rad(45))* translate(4, 0) *
+//	rotate(deg2rad(45))*translate(-6, 0) *
+//	translate(6, 4)		* vec3 { 0, 0, 1 };
 
-	//assert((test == vec3{ 2 * sqrtf(2), -6 - 2 * sqrtf(2), 1 }));
-	
-
-	//vec2 WP[8] = { {12,-8},{15,18},{5,8},{-22,-5}, {4,-2}, {-6,9},{18,88},{-22,90} };
-	//mat3 RES = mat3Identity();
-	//for (int i = 0; i < 7; ++i)
-	//{
-	//	vec2 bet = WP[i + 1] - WP[i];
-	//	
-	//	mat3 R = rotate(angle(bet) - angle(RES[0].xy));
-	//	
-
-	//	mat3 T = translate(magnitude(bet), 0);
-
-	//	RES = RES * R * T ;
-
-	//	assert((RES[2].xy == WP[i + 1]));
-	//}
+//assert((test == vec3{ 2 * sqrtf(2), -6 - 2 * sqrtf(2), 1 }));
 
 
-	/*Circle c = { 0, 0, 5 };
+//vec2 WP[8] = { {12,-8},{15,18},{5,8},{-22,-5}, {4,-2}, {-6,9},{18,88},{-22,90} };
+//mat3 RES = mat3Identity();
+//for (int i = 0; i < 7; ++i)
+//{
+//	vec2 bet = WP[i + 1] - WP[i];
+//	
+//	mat3 R = rotate(angle(bet) - angle(RES[0].xy));
+//	
+
+//	mat3 T = translate(magnitude(bet), 0);
+
+//	RES = RES * R * T ;
+
+//	assert((RES[2].xy == WP[i + 1]));
+//}
 
 
-	assert((translate(4, 0) * c == Circle{ 4, 0, 5 }));
-	
+/*Circle c = { 0, 0, 5 };
 
-	assert((scale(2, 1) * c == Circle{ 4, 0, 10 }));
-	assert((scale(2, 2) * c == Circle{ 4, 0, 10 }));
-	assert((scale(1, 2) * c == Circle{ 4, 0, 10 }));
 
-	assert((scale(-1, 1) * c == Circle{ 0, 0, 5 }));
-	
-	assert((rotate(45) * c == Circle{ 0, 0, 5 }));
+assert((translate(4, 0) * c == Circle{ 4, 0, 5 }));
+
+
+assert((scale(2, 1) * c == Circle{ 4, 0, 10 }));
+assert((scale(2, 2) * c == Circle{ 4, 0, 10 }));
+assert((scale(1, 2) * c == Circle{ 4, 0, 10 }));
+
+assert((scale(-1, 1) * c == Circle{ 0, 0, 5 }));
+
+assert((rotate(45) * c == Circle{ 0, 0, 5 }));
 */
 	AABB testA = { 1,2,3,4 };
 
@@ -105,6 +105,27 @@ int main()
 	assert((boxCollision(B, A).collisionNormal == vec2{ -1, 0 }));
 
 	assert(fequals(boxCollisionSwept(C, vec2{ 1,0 }, D, vec2{ -1,0 }).entryTime, 4));
+
+	AABB BP = { 0,0, 4,4 };
+
+	Plane P1 = { 0,0,0,1 };
+	Plane P2 = { 0,-10,0,1 };
+	Plane P3 = { 0, 10,0,1 };
+
+	assert(planeBoxCollision(P1, BP).result());
+	assert(!planeBoxCollision(P2, BP).result());
+	assert(planeBoxCollision(P3, BP).result());
+
+	vec2 verts[] = { {0,1}, {1,1}, {1,0},{0,0} };
+	vec2 verts2[] = { { -1,-1}, {-1,1}, {0,0} };
+
+	Hull myHull(verts, 4);
+	Hull otherHull(verts2, 3);
+
+	assert((myHull.normal1[0] == vec2{ 0, 1 }));
+	assert((myHull.normal1[1] == vec2{ 1, 0 }));
+	assert((myHull.normal1[2] == vec2{ 0,-1 }));
+	assert((myHull.normal1[3] == vec2{ -1,0 }));
 
 	getchar();
 	return 0;

@@ -25,12 +25,28 @@ bool operator==(const Plane &A, const Plane &B);
 
 ///////////////////////////////////////////////
 struct Ray    { };
-struct Hull   { };
+struct Hull   
+{ 
+	
+	vec2 vertices[16];
+	vec2 normal1[16];
+	unsigned int size;
+
+	Hull(const vec2 *vertices, unsigned vsize);
+	Hull();
+
+};
+
+bool operator== (const mat3 &T, const Hull & B);
+
+Hull   operator*(const mat3 &T, const Hull   &H);
 
 Circle operator*(const mat3 &T, const Circle &C);
+
 AABB   operator*(const mat3 &T, const AABB   &B);
+
 Plane  operator*(const mat3 &T, const Plane  &P);
 Ray    operator*(const mat3 &T, const Ray    &R);
-Hull   operator*(const mat3 &T, const Hull   &H);
+
 
 bool operator== (const Circle &A, const Circle & B);

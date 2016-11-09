@@ -58,31 +58,6 @@ CollisionData boxCollision(const AABB & A, const AABB & B)
 CollisionDataSwept boxCollisionSwept(const AABB & A, const vec2 & dA, const AABB & B, const vec2 & dB)
 {
 	CollisionDataSwept retval;
-	/*
-
-	float Ducks = (A.min().x - B.max().x) / (dB.x - dA.x);
-	float Chucks = (B.min().x - A.max().x) / (dA.x - dB.x);
-	float entryX;
-	float exitX;
-	float entryY;
-	float exitY;
-
-	entryX = fminf(Ducks, Chucks);
-	exitX = fmaxf(Ducks, Chucks);
-	retval.collisionNormal.x = copysignf(1, Chucks - Ducks);
-
-	float Shucks = (A.min().y - B.max().y) / (dB.y - dA.y);
-	float Bucks = (B.min().y - A.max().y) / (dA.y - dB.y);
-
-	entryY = fminf(Shucks, Bucks);
-	exitY = fmaxf(Shucks, Bucks);
-
-
-
-	retval.collisionNormal.y = copysignf(1, Bucks - Shucks);
-
-	retval.entryTime = fmaxf(entryX, entryY);
-	retval.exitTime = fminf(exitX, exitY);*/
 
 	SweptCollisionData1D Xres = sweptDectection1D(
 		A.min().x, A.max().x, dA.x, B.min().x, B.max().x, dB.x);
@@ -117,6 +92,129 @@ CollisionDataSwept boxCollisionSwept(const AABB & A, const vec2 & dA, const AABB
 
 					
 }
+
+CollisionData planeBoxCollision(const Plane & P, const AABB & B)
+{
+	CollisionData retval;
+
+	vec2 BL{ B.min().x, B.min().y },
+		 BR{ B.max().x, B.min().y },
+		 TL{ B.min().x, B.max().y },
+		 TR{ B.max().x, B.max().y };
+
+	float Pmax = dot(P.pos, P.dir);
+
+
+	float FBL = dot(P.dir, BL),
+		  FBR = dot(P.dir, BR),
+		  FTL = dot(P.dir, TL),
+		  FTR = dot(P.dir, TR);
+
+	float Amin = fminf(fminf(FBL, FBR), fminf(FTL, FTR));
+	float Amax = fmaxf(fmaxf(FBL, FBR), fmaxf(FTL, FTR));
+
+	retval.penetrationDepth = Pmax - Amin;
+	retval.collisionNormal =  P.dir;
+
+	return retval;
+}
+
+CollisionDataSwept planeBoxCollisionSwept(const Plane & P, const AABB & B, const vec2 & vel)
+{
+	{
+		CollisionDataSwept retval;
+
+		vec2 BL{ B.min().x, B.min().y },
+			BR{ B.max().x, B.min().y },
+			TL{ B.min().x, B.max().y },
+			TR{ B.max().x, B.max().y };
+
+		float Pmax = dot(P.pos, P.dir);
+		float Bvel = dot(P.pos, vel);
+
+		float FBL = dot(P.dir, BL),
+			FBR = dot(P.dir, BR),
+			FTL = dot(P.dir, TL),
+			FTR = dot(P.dir, TR);
+
+		float Amin = fminf(fminf(FBL, FBR), fminf(FTL, FTR));
+		float Amax = fmaxf(fmaxf(FBL, FBR), fmaxf(FTL, FTR));
+
+		retval.entryTime = (Amin - Pmax) / (0 - Bvel);
+
+		retval.exitTime = (Amax - Pmax) / (0 - Bvel);
+
+		return retval;
+	}
+
+}
+
+CollisionData HullCollision(const Hull & A, const Hull & B)
+{
+	int size = 0;
+	vec2 axes[32];
+
+	for (int j = 0; j < A.size; j++)
+		axes[size++] = A.normal1[j];
+
+	for (int j = 0; j < B.size; j++)
+		axes[size++] = B.normal1[j];
+
+	CollisionData retval;
+	retval.penetrationDepth = INFINITY;
+
+	for (int j = 0; j < size; j++)
+	{
+		vec2 axis = axes[j];
+		float amin = INFINITY, amax = -INFINITY;
+		float bmin = INFINITY, bmax = -INFINITY;
+
+		for (int i = 0; i < A.size; i++)
+		{
+			float proj = dot(axis, A.vertices[i]);
+			amin = fminf(proj, amin);
+			amax = fmaxf(proj, amax);
+		}
+
+		for (int i = 0; i < B.size; i++)
+		{
+			float proj = dot(axis, B.vertices[i]);
+			bmin = fminf(proj, bmin);
+			bmax = fmaxf(proj, bmax);
+		}
+
+		float pDR, pDl, pD, H;
+		pDR = amax - bmin; 
+		pDl = bmax - amin;
+
+		pD = fminf(pDR, pDl);
+		H = copysignf(1, pDl - pDR);
+
+		if (pD < retval.penetrationDepth)
+		{
+			retval.penetrationDepth = pD;
+			retval.collisionNormal = axis * H; 
+		}
+	}
+
+	return retval;
+}
+
+CollisionData HullCollisionGroups(const Hull A[], unsigned asize, const Hull B[], unsigned bzise)
+{
+	CollisionData retval;
+	retval.penetrationDepth = INFINITY;
+	for(int i = 0; i < asize; i++)
+		for (int j = 0; j < bzise; j++)
+		{
+			CollisionData temp = HullCollision(A[i], B[j]);
+
+			if (temp.penetrationDepth < retval.penetrationDepth)
+				retval = temp; 
+		}
+	return retval; 
+}
+
 
 bool CollisionData::result() const
 {
