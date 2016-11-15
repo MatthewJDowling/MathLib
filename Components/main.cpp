@@ -106,7 +106,7 @@ void main()
 
 
 		DynamicResolution(playerTransform, playerRigidbody, playerCollider,
-						occluderTransform, occluderRigidbody, occluderCollider);
+					occluderTransform, occluderRigidbody, occluderCollider);
 		
 		// draw
 
