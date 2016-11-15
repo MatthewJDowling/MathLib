@@ -14,6 +14,7 @@ union vec2
 
 vec2 operator+(const vec2&lhs, const vec2 &rhs);
 vec2 operator*(const vec2 &lhs, float rhs);
+vec2 operator*(float rhs, const vec2 &lhs);
 vec2 operator/(const vec2 &lhs, float rhs);
 vec2 operator-(const vec2 &v);
 
@@ -56,3 +57,5 @@ vec2 lerp(const vec2 &start, const vec2 &end, float alpha);
 
 vec2 min(const vec2 &A, const vec2 &B);
 vec2 max(const vec2 &A, const vec2 &B);
+vec2 reflect(const vec2 &I, const vec2 &N);
+vec2 project(const vec2 &I, const vec2 &N);

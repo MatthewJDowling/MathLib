@@ -37,3 +37,14 @@ void drawPlane(const Plane &L, unsigned color)
 	sfw::drawLine(L.pos.x, L.pos.y,
 				  L.pos.x + right.x * 20, L.pos.y + right.y * 20, color);
 }
+
+void drawHull(const Hull & B, unsigned color)
+{
+	for (int i = 0; i < B.size && i < 16; ++i)
+	{
+		sfw::drawLine(B.vertices[i].x, B.vertices[i].y,
+			B.vertices[(i + 1) % B.size].x,
+			B.vertices[(i + 1) % B.size].y, RED);
+						
+	}
+}

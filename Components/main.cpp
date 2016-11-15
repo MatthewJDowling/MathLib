@@ -9,6 +9,7 @@
 #include "PlanetaryMotor.h"
 #include "PlanetaryRenderer.h"
 #include "shapeDraw.h"
+#include "Collider.h"
 
 
 
@@ -67,6 +68,18 @@ void main()
 	playerTransform.color = CYAN;
 	playerTransform.m_scale = { 15, 15 };
 
+	/*	vec3 F = Camera *glob *vec3{   5, 0, 1};
+	vec3 L = Camera *glob *vec3{  -1,2, 1};
+	vec3 R = Camera *glob *vec3{   -1,-2, 1};*/
+
+	// Collider 
+	vec2 hullVrts[] = { {5,0},{-1,2},{-1,-2} };
+
+	Collider playerCollider(hullVrts, 3);
+	Transform occluderTransform(0, 0);
+	occluderTransform.m_scale = vec2{ 8,8 };
+	Collider occluderCollider(hullVrts, 3);
+	Rigidbody occluderRigidbody;
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
@@ -85,13 +98,22 @@ void main()
 		plan1RB.integrate(plan1, deltaTime);
 		sunRbody.integrate(sunTransform, deltaTime);
 
+		
+	/*	StaticResolution(playerTransform, playerRigidbody, playerCollider,
+			occluderTransform, occluderCollider);*/
+		
+		occluderRigidbody.integrate(occluderTransform, deltaTime);
 
+
+		DynamicResolution(playerTransform, playerRigidbody, playerCollider,
+						occluderTransform, occluderRigidbody, occluderCollider);
+		
 		// draw
 
 		// CAMERA
 		cameraTransform.m_position = lerp(
 			cameraTransform.m_position,
-			(playerTransform.getGlobalPosition()),// + sunTransform.getGlobalPosition()) / 2,
+			(playerTransform.getGlobalPosition()),
 			1);
 
 		mat3 proj = translate(W/2, H/2) * scale(1, 1);
@@ -109,19 +131,19 @@ void main()
 
 		//playerRigidbody.debugDraw(camera, playerTransform);
 
-		sunRenderer.draw(camera, sunTransform);
-		plan1renderer.draw(camera, plan1);
-		moon1renderer.draw(camera, moon1);
+	sunRenderer.draw(camera, sunTransform);
+		/*plan1renderer.draw(camera, plan1);
+		moon1renderer.draw(camera, moon1);*/
 
-		playerRender.draw(camera, playerTransform);
+		 playerRender.draw(camera, playerTransform);
 
-		drawAABB(camera * playerTransform.getGlobalTransform() * AABB { 0, 3, 0, 3 }, RED);
 
-		drawPlane(camera
+		/*drawPlane(camera
 			*playerTransform.getGlobalTransform()
-			*Plane {0, 0, 0, 1}, WHITE);
+			*Plane {0, 0, 0, 1}, WHITE);*/
 
-		//drawPlane({ 400,200,0,1 }, WHITE);
+		playerCollider.DebugDraw(camera, playerTransform);
+		occluderCollider.DebugDraw(camera, occluderTransform);
 	}
 
 	sfw::termContext();

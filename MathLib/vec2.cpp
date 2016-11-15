@@ -41,6 +41,11 @@ vec2 operator *(const vec2 &lhs, float rhs)
 {
 	return vec2{ lhs.x * rhs, lhs.y * rhs };
 }
+
+vec2 operator *(float rhs, const vec2 &lhs)
+{
+	return vec2{ lhs.x * rhs, lhs.y * rhs };
+}
 //vec2 & operator-=(vec2 & lhs, const vec2 & rhs)//Assignment Component Subtraction
 //{
 //	return lhs = lhs - rhs;
@@ -128,3 +133,14 @@ vec2 max(const vec2 & A, const vec2 & B)
 		A.x > B.x ? A.x : B.x,
 		A.y > B.y ? A.y : B.y };
 }
+
+vec2 reflect(const vec2 & I, const vec2 & N)
+{
+	return I - 2 * project(I, N);
+}
+
+vec2 project(const vec2 & I, const vec2 & N)
+{
+	return dot(I , normal(N)) * normal(N);
+}
+

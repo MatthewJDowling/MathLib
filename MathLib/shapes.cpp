@@ -1,4 +1,5 @@
 #include "shapes.h"
+#include <cmath>
 
 
 
@@ -76,33 +77,27 @@ bool operator==(const Plane &A, const Plane &B)
 	return A.pos == B.pos && A.dir == B.dir;
 }
 
-Hull::Hull(const vec2 * vertices, unsigned vsize)
+Hull::Hull(const vec2 * a_vertices, unsigned a_vsize)
 {
-	for (int i = 0; i < vsize; i++)
+	size = a_vsize;
+	for (int i = 0; i < a_vsize; i++)
 	{
-		vertices[vsize];
-
-		vec2 vecBe = vertices[i] - vertices[i + 1];
-		if (i >= vsize - 1)
+		// calculate the normal
+		vec2 vecBe = a_vertices[i] - a_vertices[i + 1];
+		if (i >= a_vsize - 1)
 		{
-			vecBe = vertices[i] - vertices[0];
+			vecBe = a_vertices[i] - a_vertices[0];
 		}
 		vec2 vecNorm = normal(vecBe);
 		vec2 vecPerp = perp(vecNorm);
 
+		vertices[i] = a_vertices[i];
 		normal1[i] = vecPerp;
 			
 	}
 }
 
-Hull::Hull()
-{
-}
 
-//bool operator==(const mat3 & T, const Hull & B)
-//{
-//	return 0;
-//}
 
 Hull   operator*(const mat3 &T, const Hull &H)
 {
@@ -111,7 +106,26 @@ Hull   operator*(const mat3 &T, const Hull &H)
 	for (int i = 0; i < H.size; ++i)
 	{
 		retval.vertices[i] = (T *vec3{ H.vertices[i].x, H.vertices[i].y, 1 }).xy;
-		retval.normal1[i] = (T *vec3{ H.normal1[i].x, H.normal1[i].y, 1 }).xy;
+		retval.normal1[i] = normal(T *vec3{ H.normal1[i].x, H.normal1[i].y, 0 }).xy;
 	}
 	return retval;
 }
+
+float Hull::min(const vec2 &axis) const
+{
+	float amin = INFINITY; 
+	for (int i = 0; i < size; i++)
+		amin = fminf(dot(axis, vertices[i]), amin);
+	return amin;
+}
+
+float Hull::max(const vec2 &axis) const
+{
+	float amax = -INFINITY;
+	for (int i = 0; i < size; i++)
+		amax = fmaxf(dot(axis, vertices[i]), amax);
+	return amax; 
+}
+
+
+Hull::Hull() { size = 0; }
