@@ -44,7 +44,7 @@ void drawHull(const Hull & B, unsigned color)
 	{
 		sfw::drawLine(B.vertices[i].x, B.vertices[i].y,
 			B.vertices[(i + 1) % B.size].x,
-			B.vertices[(i + 1) % B.size].y, RED);
+			B.vertices[(i + 1) % B.size].y, color);
 						
 	}
 }

@@ -5,7 +5,8 @@
 #include "RigidBody.h"
 #include "SpaceshipController.h"
 #include "spaceShipLocomotion.h"
-
+#include "SpaceShipRenderer.h"
+#include "sfwdraw.h"
 
 
 
@@ -15,12 +16,15 @@ public:
 	Transform	transform;
 	Collider	collider;
 	Rigidbody	rigidbody;
+
 	SpaceshipController controller;
 	SpaceShipLocomotion locomotion;
+	SpaceshipRenderer render;
 
 	PlayerShip();
 
-	void update(float deltaTime, class  GameState &gs);
+	void update(float deltaTime, class  Gamestate &gs, PlayerShip &player);
 	void draw(const mat3 & camera);
 
+	bool grounded;
 };

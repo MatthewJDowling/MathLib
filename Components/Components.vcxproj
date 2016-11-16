@@ -120,13 +120,16 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CollisionInt.cpp" />
     <ClCompile Include="Gamestate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="planetaryMotor.cpp" />
     <ClCompile Include="PlanetaryRenderer.cpp" />
     <ClCompile Include="planetMotor.cpp" />
+    <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="Rock.cpp" />
     <ClCompile Include="shapeDraw.cpp" />
     <ClCompile Include="SpaceshipController.cpp" />
     <ClCompile Include="spaceShipLocomotion.cpp" />
@@ -136,11 +139,14 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionInt.h" />
     <ClInclude Include="Gamestate.h" />
     <ClInclude Include="PlanetaryMotor.h" />
     <ClInclude Include="PlanetaryRenderer.h" />
+    <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="Rock.h" />
     <ClInclude Include="shapeDraw.h" />
     <ClInclude Include="SpaceshipController.h" />
     <ClInclude Include="spaceShipLocomotion.h" />
