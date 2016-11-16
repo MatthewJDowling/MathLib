@@ -17,7 +17,7 @@ void SpaceshipController::update(SpaceShipLocomotion & loco)
 {
 	float vInput = 0.0f;
 	
-	vInput -= sfw::getKey(CTR_DOWN);
+	// vInput -= sfw::getKey(CTR_DOWN);
     vInput += sfw::getKey(CTR_UP);
 
 	float hInput = 0.0f;

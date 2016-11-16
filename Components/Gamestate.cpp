@@ -3,19 +3,22 @@
 void Gamestate::play()
 {
 	player.transform.m_position = vec2{ 45,5 };
-	player.transform.m_facing = 90;
+	player.transform.m_facing = 1.57;
 
 	rock[0].transform.m_position = vec2{ 200,200 };
 	rock[1].transform.m_position = vec2{ 800,200 };
 
 	plat[0].transform.m_position = vec2{ 25,-15 };
 	plat[1].transform.m_position = vec2{ 700,-15 };
+
+	grapple.timer = 0;
 }
 
 void Gamestate::update(float deltaTime)
 {
 	player.update(deltaTime, *this, player);
 	camera.update(deltaTime, *this);
+	grapple.update(deltaTime, *this);
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -42,6 +45,7 @@ void Gamestate::draw()
 	mat3 cam = camera.getCameraMatrix();
 
 	player.draw(cam);
+	grapple.draw(cam);
 
 	for (int i = 0; i < 2; i++)
 	{

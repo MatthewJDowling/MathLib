@@ -14,6 +14,7 @@ class Rigidbody
 		vec2 velocity;
 		vec2 acceleration; 
 		
+		bool isGravity; 
 		
 		
 		float torque;

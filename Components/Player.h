@@ -17,7 +17,7 @@ public:
 	Collider	collider;
 	Rigidbody	rigidbody;
 
-	SpaceshipController controller;
+	
 	SpaceShipLocomotion locomotion;
 	SpaceshipRenderer render;
 

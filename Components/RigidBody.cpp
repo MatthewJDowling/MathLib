@@ -14,6 +14,9 @@ Rigidbody::Rigidbody()
 	mass = 1.0f;
 	drag = .25f;
 	angularDrag = 1.f;
+
+	isGravity = true; 
+
 }
 
 
