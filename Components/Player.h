@@ -7,6 +7,7 @@
 #include "spaceShipLocomotion.h"
 #include "SpaceShipRenderer.h"
 #include "sfwdraw.h"
+#include "Grapple.h"
 
 
 
@@ -16,7 +17,7 @@ public:
 	Transform	transform;
 	Collider	collider;
 	Rigidbody	rigidbody;
-
+	Grapple grapple;
 	
 	SpaceShipLocomotion locomotion;
 	SpaceshipRenderer render;

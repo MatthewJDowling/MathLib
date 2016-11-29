@@ -3,21 +3,22 @@
 #include "shapeDraw.h"
 SpaceshipRenderer::SpaceshipRenderer()
 {
-	color = MAGENTA;
+	color = RED;
 }
 
 void SpaceshipRenderer::draw(const mat3 & Camera,const Transform & ship)
 {
 	mat3 glob = ship.getGlobalTransform();
 
-	vec3 F = Camera *glob *vec3{   5, 0, 1};
-	vec3 L = Camera *glob *vec3{  -1,2, 1};
-	vec3 R = Camera *glob *vec3{   -1,-2, 1};
+	vec3 tr = Camera *glob *vec3{  1, 1, 1};
+	vec3 tl = Camera *glob *vec3{ -1, 1, 1};
+	vec3 bl = Camera *glob *vec3{ -1,-1, 1};
+	vec3 br= Camera *glob *vec3{  1,-1, 1};
 
-	sfw::drawLine(L.x, L.y, F.x, F.y, color);
-	sfw::drawLine(F.x, F.y, R.x, R.y, color);
-	sfw::drawLine(R.x, R.y, L.x, L.y, color);
-	
+	sfw::drawLine(tr.x, tr.y, tl.x, tl.y, color);
+	sfw::drawLine(tl.x, tl.y, bl.x, bl.y, color);
+	sfw::drawLine(bl.x, bl.y, br.x, br.y, color);
+	sfw::drawLine(br.x, br.y, tr.x, tr.y, color);
 	
 
 }

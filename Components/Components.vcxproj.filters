@@ -69,6 +69,9 @@
     <ClCompile Include="Grapple.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spike.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Transform.h">
@@ -117,6 +120,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Grapple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spike.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

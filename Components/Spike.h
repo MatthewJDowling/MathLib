@@ -3,22 +3,16 @@
 #include "Collider.h"
 #include "RigidBody.h"
 
-class Grapple
+class Spike
 {
 public:
 	Transform	transform;
 	Collider	collider;
 	Rigidbody	rigidbody;
 
-	float timer; 
-	bool isAlive; 
+	Spike();
 
-	bool isAttached;
-	
-
-	Grapple();
-
-	void update(float deltaTime, Transform & target_trans, Rigidbody &target_rbody, class  Gamestate &gs);
+	void update(float deltaTime, class  Gamestate &gs);
 	void draw(const mat3 & camera);
 
 };

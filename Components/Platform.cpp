@@ -2,9 +2,9 @@
 
 Platform::Platform()
 {
-	vec2 hullvrts[] = { { 0,0 },{ 50,0 }};
+	vec2 hullvrts[] = { { 0,0 },{ 50,0 }, {50,-10}, {0,-10} };
 
-	collider = Collider(hullvrts, 2);
+	collider = Collider(hullvrts, 4);
 
 	transform.m_scale = vec2{ 10,10 };
 	rigidbody.drag = 0.0f;

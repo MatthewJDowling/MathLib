@@ -5,6 +5,8 @@
 #include "Platform.h"
 #include "CollisionInt.h"
 #include "Grapple.h"
+#include "Spike.h"
+
 
 class Gamestate
 {
@@ -12,9 +14,12 @@ class Gamestate
 public: 
 	PlayerShip player;
 	Camera camera; 
-	Rock rock[2];
-	Platform plat[2];
+	Rock rock[4];
+	Platform plat[7];
+	Spike spike[3];
+
 	Grapple grapple; 
+	
 
 	void play();
 	void update(float deltaTime);

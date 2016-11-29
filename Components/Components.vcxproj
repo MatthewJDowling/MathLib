@@ -135,6 +135,7 @@
     <ClCompile Include="SpaceshipController.cpp" />
     <ClCompile Include="spaceShipLocomotion.cpp" />
     <ClCompile Include="SpaceShipRenderer.cpp" />
+    <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="SpaceshipController.h" />
     <ClInclude Include="spaceShipLocomotion.h" />
     <ClInclude Include="SpaceShipRenderer.h" />
+    <ClInclude Include="Spike.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
