@@ -27,5 +27,11 @@ public:
 	void update(float deltaTime, class  Gamestate &gs, PlayerShip &player);
 	void draw(const mat3 & camera);
 
+	float timer; 
 	bool grounded;
+	bool isHitUp;
+	bool isHitLeft;
+	bool isHitRight; 
+	bool isHitDown;
+	bool hitStun; 
 };

@@ -4,12 +4,15 @@
 #include "Platform.h"
 #include "Grapple.h"
 #include "Spike.h"
+#include "badGuy.h"
+#include "barriers.h"
 
-void PlayerPlatformCollision(PlayerShip &player, Platform plat);
+void PlayerPlatformCollision(PlayerShip &player, Platform  & plat);
 
-void PlayerRockCollision(PlayerShip & player, Rock a_rock);
+void PlayerRockCollision(PlayerShip & player, Rock & a_rock);
 
 void GrappleRockCollision(Grapple & a_grapple, Rock & a_rock, PlayerShip player);
 
-void PlayerSpikeCollision(PlayerShip & player, Spike a_spike);
+void PlayerSpikeCollision(PlayerShip & player, Spike & a_spike);
 
+void BadGuyBarrierCollision(BadGuy & badguy , Barrier & barrier);

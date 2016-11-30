@@ -118,6 +118,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="badGuy.cpp" />
+    <ClCompile Include="Barriers.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionInt.cpp" />
@@ -139,6 +141,8 @@
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="badGuy.h" />
+    <ClInclude Include="barriers.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionInt.h" />

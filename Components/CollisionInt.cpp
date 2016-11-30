@@ -1,7 +1,7 @@
 #include "CollisionInt.h"
 #include <iostream>
 
-void PlayerPlatformCollision(PlayerShip & player, Platform plat)
+void PlayerPlatformCollision(PlayerShip & player,  Platform  & plat)
 {
 	CollisionData result =
 		StaticResolution(player.transform, player.rigidbody, player.collider,
@@ -19,7 +19,7 @@ void PlayerPlatformCollision(PlayerShip & player, Platform plat)
 	}
 }
 
-void PlayerRockCollision(PlayerShip & player, Rock a_rock)
+void PlayerRockCollision(PlayerShip & player, Rock & a_rock)
 {
 	CollisionData result =
 		StaticResolution(player.transform, player.rigidbody, player.collider,
@@ -39,10 +39,49 @@ void GrappleRockCollision(Grapple & a_grapple, Rock & a_rock, PlayerShip player)
 	}
 }
 
-void PlayerSpikeCollision(PlayerShip & player, Spike a_spike)
+void PlayerSpikeCollision(PlayerShip & player,  Spike  & a_spike)
 {
 	CollisionData result =
 		StaticResolution(player.transform, player.rigidbody, player.collider,
 			a_spike.transform, a_spike.collider, 1);
 
+	if (result.result())
+	{
+		if (a_spike.transform.m_facing == 1.57f)
+		{
+			player.isHitLeft = true; 
+			player.timer = 1.25; 
+		}
+		if (a_spike.transform.m_facing == 0.0f)
+		{
+			player.isHitUp = true;
+			player.timer = 1.25;
+		}
+		if (a_spike.transform.m_facing == -1.57f)
+		{
+			player.isHitRight = true;
+			player.timer = 1.25;
+			
+		}
+		if (a_spike.transform.m_facing == 3.14f)
+		{
+			player.isHitDown = true;
+			player.timer = 1.25;
+		}
+		
+		
+	}
+
+}
+
+void BadGuyBarrierCollision(BadGuy & badguy, Barrier & barrier)
+{
+	CollisionData result =
+		StaticResolution(badguy.transform, badguy.rigidbody, badguy.collider,
+			barrier.transform, barrier.collider, 1);
+
+	if (result.result())
+	{
+		badguy.turnNow = true; 
+	}
 }

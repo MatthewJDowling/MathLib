@@ -46,6 +46,10 @@ vec2 operator *(float rhs, const vec2 &lhs)
 {
 	return vec2{ lhs.x * rhs, lhs.y * rhs };
 }
+vec2 &operator*=(vec2 &lhs, float rhs)
+{
+	return lhs = lhs * rhs;
+}
 //vec2 & operator-=(vec2 & lhs, const vec2 & rhs)//Assignment Component Subtraction
 //{
 //	return lhs = lhs - rhs;

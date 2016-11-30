@@ -2,6 +2,7 @@
 #include "Gamestate.h"
 
 
+
 PlayerShip::PlayerShip()
 {
 	vec2 hullVrts[] = { { 1,1 },{ -1,1 },{ -1,-1 }, {1,-1} };
@@ -12,6 +13,8 @@ PlayerShip::PlayerShip()
 
 void PlayerShip::update(float deltaTime, Gamestate & gs, PlayerShip &player)
 {
+	player.timer -= deltaTime;
+
 	locomotion.update(transform, rigidbody);
 
 	rigidbody.integrate(transform, deltaTime);
@@ -21,22 +24,51 @@ void PlayerShip::update(float deltaTime, Gamestate & gs, PlayerShip &player)
 		rigidbody.addForce(vec2{ 0,-500 });
 	}
 	
-
-	if (player.grounded == true)
+	if (player.timer <= 0)
 	{
-		if (sfw::getKey('W'))
+		if (player.grounded == true)
 		{
-			rigidbody.addImpulse(vec2{ 0,500 });
-			
-			player.grounded = false; 
+			if (sfw::getKey('W'))
+			{
+				rigidbody.addImpulse(vec2{ 0,500 });
+
+				player.grounded = false;
+			}
+		}
+		if (grapple.isAttached == false)
+		{
+			if (sfw::getKey('D'))
+				rigidbody.addForce(vec2{ 15000,0 });
+			if (sfw::getKey('A'))
+				rigidbody.addForce(vec2{ -15000,0 });
+		}
+		if (sfw::getKey(' ') && !gs.grapple.isAlive)
+		{
+			//gs.grapple.rigidbody.isGravity = false; 
+			gs.grapple.timer = 1.f;
+
+			gs.grapple.transform.m_position = transform.m_position;
+			gs.grapple.transform.m_facing = transform.m_facing - 50.f;
+
+			gs.grapple.rigidbody.velocity = vec2{ 0,0 };
+			gs.grapple.rigidbody.addImpulse(transform.getDirection() * 2000.f);
 		}
 	}
-	if ( grapple.isAttached == false)
+	
+	if (player.isHitUp == true)
 	{
-		if (sfw::getKey('D'))
-			rigidbody.addImpulse(vec2{ 400,0 });
-		if (sfw::getKey('A'))
-			rigidbody.addImpulse(vec2{ -400,0 });
+		rigidbody.addImpulse(vec2{ 0,2500 });
+		player.isHitUp = false; 
+	}
+	if (player.isHitRight == true)
+	{
+		rigidbody.addImpulse(vec2{ 2500,0 });
+		player.isHitRight = false;
+	}
+	if (player.isHitLeft == true)
+	{
+		rigidbody.addImpulse(vec2{ -2500,0 });
+		player.isHitLeft = false;
 	}
 
 	
@@ -46,17 +78,7 @@ void PlayerShip::update(float deltaTime, Gamestate & gs, PlayerShip &player)
 	if (sfw::getKey('A'))
 		rigidbody.addForce(vec2{ -20000,0 });*/
 
-	if (sfw::getKey(' ') && !gs.grapple.isAlive)
-	{
-		//gs.grapple.rigidbody.isGravity = false; 
-		gs.grapple.timer = 1.f; 
 
-		gs.grapple.transform.m_position = transform.m_position;
-		gs.grapple.transform.m_facing = transform.m_facing - 50.f;
-
-		gs.grapple.rigidbody.velocity = vec2{ 0,0 };
-		gs.grapple.rigidbody.addImpulse(transform.getDirection() * 2000.f);
-	}
 	
 		
 }

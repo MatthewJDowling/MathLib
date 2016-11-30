@@ -72,6 +72,12 @@
     <ClCompile Include="Spike.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="badGuy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Barriers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Transform.h">
@@ -123,6 +129,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Spike.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="badGuy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="barriers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

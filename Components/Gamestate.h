@@ -6,7 +6,8 @@
 #include "CollisionInt.h"
 #include "Grapple.h"
 #include "Spike.h"
-
+#include "badGuy.h"
+#include "barriers.h"
 
 class Gamestate
 {
@@ -17,7 +18,8 @@ public:
 	Rock rock[4];
 	Platform plat[7];
 	Spike spike[3];
-
+	BadGuy badguy[3];
+	Barrier barrier[8];
 	Grapple grapple; 
 	
 

@@ -5,31 +5,61 @@
 
 void Gamestate::play()
 {
+	//Player
 	player.transform.m_position = vec2{ 45,10 };
 	player.transform.m_facing = 1.57;
+
+	//Rocks
 
 	rock[0].transform.m_position = vec2{ 550,300   };
 	rock[1].transform.m_position = vec2{ 1500,300  };
 	rock[2].transform.m_position = vec2{ 2000,300  };
 	rock[3].transform.m_position = vec2{ 2860, 650 };
 
-	spike[0].transform.m_position = vec2{ 1750, 150 };
-	spike[1].transform.m_position = vec2{ 550,  100 };
-	spike[2].transform.m_position = vec2{2300,  650 };
+	// Bad Guys 
 
-	plat[0].transform.m_position = vec2{ 25,-15 };//Platforms
-	plat[1].transform.m_position = vec2{ 675, 105 };//
-	plat[2].transform.m_position = vec2{ 2500, 175 };//
-	plat[5].transform.m_position = vec2{ 2300, 600 };//
+	badguy[0].transform.m_position = vec2{ 2700, 600 };
+	badguy[1].transform.m_position = vec2{200,-15};
+	badguy[2].transform.m_position = vec2{2600, 175};
 
-	
-	plat[3].transform.m_position = vec2{ 25,385 };//Walls
-	plat[4].transform.m_position = vec2{ 3000,675 };//
-	plat[6].transform.m_position = vec2{ 1500,100000 };//			
+
+	//Spikes
+
+	spike[0].transform.m_position = vec2{ 1750, 150};//1750,150
+	spike[1].transform.m_position = vec2{ 675, 25};//600,40
+	spike[2].transform.m_position = vec2{2900,  500 };//2900, 500
+	spike[2].transform.m_facing = 1.57f;
+	spike[1].transform.m_facing = 1.57f;
+	spike[0].transform.m_facing = 0;
+
+	//Platforms
+
+	plat[0].transform.m_position = vec2{ 25,-15 };
+	plat[1].transform.m_position = vec2{ 675, 105 };
+	plat[2].transform.m_position = vec2{ 2500, 175 };
+	plat[5].transform.m_position = vec2{ 2300, 600 };
+
+	//Walls
+
+	plat[3].transform.m_position = vec2{ 25,385 };
+	plat[4].transform.m_position = vec2{ 3000,675 };
+	plat[6].transform.m_position = vec2{ 1500,100000 };		
 	plat[3].transform.m_facing = -1.57f;
 	plat[4].transform.m_facing = -1.57f;
 	plat[6].transform.m_facing = -1.57f;
+
+	//
+	barrier[0].transform.m_position = vec2{ 25,-15   };
+	barrier[1].transform.m_position = vec2{ 515,-15   }; //515 440
 	
+	barrier[2].transform.m_position = vec2{ 675,105  };
+	barrier[3].transform.m_position = vec2{ 1175,105  };
+
+	barrier[4].transform.m_position = vec2{ 2500,90 };
+	barrier[5].transform.m_position = vec2{ 2900,175 };
+
+	barrier[6].transform.m_position = vec2{ 2300,600 };
+	barrier[7].transform.m_position = vec2{ 2800,600 };
 	
 
 	grapple.timer = 0;
@@ -52,7 +82,7 @@ void Gamestate::update(float deltaTime)
 		PlayerPlatformCollision(player, plat[i]);
 	}
 
-	//std::cout << "player grounded? " << player.grounded << "\n";
+	
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -69,15 +99,28 @@ void Gamestate::update(float deltaTime)
 		rock[i].update(deltaTime, *this);
 	}
 
+
+	for (int i = 0; i < 3; i++)
+	{
+		spike[i].update(deltaTime, *this);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		badguy[i].update(deltaTime, *this);
+	}
+	for (int i = 0; i < 8; i++)
+	{
+		barrier[i].update(deltaTime, *this);
+	}
+
+
+
 	for (int i = 0; i < 4; i++)
 	{
 		GrappleRockCollision(grapple, rock[i] , player);
 	}
 	
-	for (int i = 0; i < 3; i++)
-	{
-		spike[i].update(deltaTime, *this);
-	}
+
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -85,6 +128,11 @@ void Gamestate::update(float deltaTime)
 		
 	}
 
+	for(int j = 0; j < 3; j++)
+		for(int i = 0; i < 8; i++)
+		{
+			BadGuyBarrierCollision(badguy[j], barrier[i]);
+		}
 
 }
 
@@ -109,6 +157,16 @@ void Gamestate::draw()
 	for (int i = 0; i < 3; i++)
 	{
 		spike[i].draw(cam);
+
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		badguy[i].draw(cam);
+
+	}
+	for (int i = 0; i < 8; i++)
+	{
+		barrier[i].draw(cam);
 
 	}
 }
