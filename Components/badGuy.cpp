@@ -10,6 +10,7 @@ BadGuy::BadGuy()
 
 	badGuyMS = vec2 { 50,0 };
 
+	transform.m_facing = 6.28;
 }
 
 void BadGuy::update(float deltaTime, Gamestate & gs)
@@ -23,6 +24,7 @@ void BadGuy::update(float deltaTime, Gamestate & gs)
 	if (turnNow == true)
 	{
 		badGuyMS *= -1; 
+		transform.m_facing *= -1;
 		turnNow = false; 
 	}
 	
@@ -34,5 +36,5 @@ void BadGuy::draw(const mat3 & camera)
 {
 	//Brown color code : 0x87694fff
 	collider.DebugDraw(camera, transform);
-
+	collider.color = RED;
 }

@@ -21,5 +21,5 @@ void Spike::draw(const mat3 & camera)
 {
 	//Brown color code : 0x87694fff
 	collider.DebugDraw(camera, transform);
-
+	collider.color = RED; 
 }

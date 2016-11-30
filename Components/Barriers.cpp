@@ -20,4 +20,5 @@ void Barrier::update(float deltaTime, Gamestate & gs)
 void Barrier::draw(const mat3 & camera)
 {
 	collider.DebugDraw(camera, transform);
+	collider.color = WHITE; 
 }

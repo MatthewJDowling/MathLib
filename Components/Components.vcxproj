@@ -139,6 +139,7 @@
     <ClCompile Include="SpaceShipRenderer.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="winFlag.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="badGuy.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="SpaceShipRenderer.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="winFlag.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

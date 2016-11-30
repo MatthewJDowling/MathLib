@@ -78,6 +78,9 @@
     <ClCompile Include="Barriers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="winFlag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Transform.h">
@@ -135,6 +138,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="barriers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winFlag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

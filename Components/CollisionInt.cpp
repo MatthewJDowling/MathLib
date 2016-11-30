@@ -49,23 +49,23 @@ void PlayerSpikeCollision(PlayerShip & player,  Spike  & a_spike)
 	{
 		if (a_spike.transform.m_facing == 1.57f)
 		{
-			player.isHitLeft = true; 
+			player.isHitLeftSpike = true; 
 			player.timer = 1.25; 
 		}
 		if (a_spike.transform.m_facing == 0.0f)
 		{
-			player.isHitUp = true;
+			player.isHitUpSpike = true;
 			player.timer = 1.25;
 		}
 		if (a_spike.transform.m_facing == -1.57f)
 		{
-			player.isHitRight = true;
+			player.isHitRightSpike = true;
 			player.timer = 1.25;
 			
 		}
 		if (a_spike.transform.m_facing == 3.14f)
 		{
-			player.isHitDown = true;
+			player.isHitDownSpike = true;
 			player.timer = 1.25;
 		}
 		
@@ -83,5 +83,47 @@ void BadGuyBarrierCollision(BadGuy & badguy, Barrier & barrier)
 	if (result.result())
 	{
 		badguy.turnNow = true; 
+	}
+}
+
+void playerBadGuyCollision(PlayerShip & player, BadGuy & badguy)
+{
+	CollisionData result =
+		StaticResolution(player.transform, player.rigidbody, player.collider,
+			badguy.transform, badguy.collider, 0);
+
+	if (result.result())
+	{
+		if (player.rigidbody.force.x > 0)
+		{
+			player.isHitLeftBadG = true;
+			player.timer = 1.25;
+		}
+
+		if (player.rigidbody.force.x < 0)
+		{
+			player.isHitRightBadG = true ;
+			player.timer = 1.25;
+		}
+		if (player.rigidbody.force.x == 0)
+		{
+			player.isHitUpBadG = true; 
+			player.timer = 1.25;
+		}
+			
+		
+	}
+
+}
+
+void playerFlagCollision(PlayerShip & player, Flag & flag)
+{
+	CollisionData result =
+		StaticResolution(player.transform, player.rigidbody, player.collider,
+			flag.transform, flag.collider, 0);
+	
+	if (result.result())
+	{
+		player.isWin = true; 
 	}
 }

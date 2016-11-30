@@ -19,6 +19,16 @@ void PlayerShip::update(float deltaTime, Gamestate & gs, PlayerShip &player)
 
 	rigidbody.integrate(transform, deltaTime);
 
+	if (player.transform.m_position.y <= -300)
+	{
+		player.transform.m_position = vec2{ 45,10 };
+	}
+	if (player.isWin == true)
+	{
+		player.transform.m_position = vec2{ 45,10 };
+		player.isWin = false; 
+	}
+
 	if (rigidbody.isGravity == true)
 	{
 		rigidbody.addForce(vec2{ 0,-500 });
@@ -47,30 +57,44 @@ void PlayerShip::update(float deltaTime, Gamestate & gs, PlayerShip &player)
 			//gs.grapple.rigidbody.isGravity = false; 
 			gs.grapple.timer = 1.f;
 
-			gs.grapple.transform.m_position = transform.m_position;
-			gs.grapple.transform.m_facing = transform.m_facing - 50.f;
+		gs.grapple.transform.m_facing = transform.m_facing - 50.f;
 
 			gs.grapple.rigidbody.velocity = vec2{ 0,0 };
 			gs.grapple.rigidbody.addImpulse(transform.getDirection() * 2000.f);
 		}
 	}
 	
-	if (player.isHitUp == true)
+	if (player.isHitUpBadG == true)
 	{
 		rigidbody.addImpulse(vec2{ 0,2500 });
-		player.isHitUp = false; 
+		player.isHitUpBadG = false; 
 	}
-	if (player.isHitRight == true)
+	if (player.isHitRightBadG == true)
 	{
-		rigidbody.addImpulse(vec2{ 2500,0 });
-		player.isHitRight = false;
+		rigidbody.addImpulse(vec2{ -2000,2500 });
+		player.isHitRightBadG = false;
 	}
-	if (player.isHitLeft == true)
+	if (player.isHitLeftBadG == true)
 	{
-		rigidbody.addImpulse(vec2{ -2500,0 });
-		player.isHitLeft = false;
+		rigidbody.addImpulse(vec2{ 2000,2500 });
+		player.isHitLeftBadG = false;
 	}
-
+	//////////////////////////////////////
+	if (player.isHitUpSpike == true)
+	{
+		rigidbody.addImpulse(vec2{ 0,750 });
+		player.isHitUpSpike = false;
+	}
+	if (player.isHitRightSpike == true)
+	{
+		rigidbody.addImpulse(vec2{ 1000,0 });
+		player.isHitRightSpike= false;
+	}
+	if (player.isHitLeftSpike == true)
+	{
+		rigidbody.addImpulse(vec2{ -1000,0 });
+		player.isHitLeftSpike = false;
+	}
 	
 	
 	/*if (sfw::getKey('D'))
@@ -86,7 +110,8 @@ void PlayerShip::update(float deltaTime, Gamestate & gs, PlayerShip &player)
 void PlayerShip::draw(const mat3 &camera)
 {
 	//transform.debugDraw(camera);
-	//collider.DebugDraw(camera, transform);
+	collider.DebugDraw(camera, transform);
 	//rigidbody.debugDraw(camera, transform);
-	render.draw(camera, transform);
+	//render.draw(camera, transform);
+	collider.color = BLUE;
 }

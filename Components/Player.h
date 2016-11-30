@@ -29,9 +29,13 @@ public:
 
 	float timer; 
 	bool grounded;
-	bool isHitUp;
-	bool isHitLeft;
-	bool isHitRight; 
-	bool isHitDown;
+	bool isHitUpSpike;
+	bool isHitLeftSpike;
+	bool isHitRightSpike; 
+	bool isHitDownSpike;
+	bool isHitRightBadG;
+	bool isHitLeftBadG;
+	bool isHitUpBadG;
 	bool hitStun; 
+	bool isWin;
 };

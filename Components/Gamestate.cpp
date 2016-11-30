@@ -21,7 +21,7 @@ void Gamestate::play()
 	badguy[0].transform.m_position = vec2{ 2700, 600 };
 	badguy[1].transform.m_position = vec2{200,-15};
 	badguy[2].transform.m_position = vec2{2600, 175};
-
+	
 
 	//Spikes
 
@@ -60,6 +60,8 @@ void Gamestate::play()
 
 	barrier[6].transform.m_position = vec2{ 2300,600 };
 	barrier[7].transform.m_position = vec2{ 2800,600 };
+
+	flag.transform.m_position = vec2{2300,600};
 	
 
 	grapple.timer = 0;
@@ -67,9 +69,15 @@ void Gamestate::play()
 
 void Gamestate::update(float deltaTime)
 {
+
+	/*system("cls");
+	printf("%f", player.rigidbody.force.x);*/
+
+
  	player.update(deltaTime, *this, player);
 	camera.update(deltaTime, *this);
 	grapple.update(deltaTime, player.transform, player.rigidbody, *this);
+	flag.update(deltaTime, *this);
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -77,10 +85,7 @@ void Gamestate::update(float deltaTime)
 	}
 
 	player.grounded = false;
-	for (int i = 0; i < 7; i++)
-	{
-		PlayerPlatformCollision(player, plat[i]);
-	}
+	
 
 	
 
@@ -89,11 +94,7 @@ void Gamestate::update(float deltaTime)
 		rock[i].update(deltaTime, *this);
 	}
 
-	for (int i = 0; i < 4; i++)
-	{
-		PlayerRockCollision(player, rock[i]);
-	}
-
+	
 	for (int i = 0; i < 4; i++)
 	{
 		rock[i].update(deltaTime, *this);
@@ -112,7 +113,14 @@ void Gamestate::update(float deltaTime)
 	{
 		barrier[i].update(deltaTime, *this);
 	}
-
+	for (int i = 0; i < 7; i++)
+	{
+		PlayerPlatformCollision(player, plat[i]);
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		PlayerRockCollision(player, rock[i]);
+	}
 
 
 	for (int i = 0; i < 4; i++)
@@ -133,6 +141,16 @@ void Gamestate::update(float deltaTime)
 		{
 			BadGuyBarrierCollision(badguy[j], barrier[i]);
 		}
+	for (int i = 0; i < 3; i++)
+	{
+		playerBadGuyCollision(player, badguy[i]);
+
+	}
+	for (int i = 0; i < 1; i++)
+	{
+		playerFlagCollision(player, flag);
+
+	}
 
 }
 
@@ -142,6 +160,7 @@ void Gamestate::draw()
 
 	player.draw(cam);
 	grapple.draw(cam);
+	flag.draw(cam);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -164,9 +183,10 @@ void Gamestate::draw()
 		badguy[i].draw(cam);
 
 	}
-	for (int i = 0; i < 8; i++)
+
+	/*for (int i = 0; i < 8; i++)
 	{
 		barrier[i].draw(cam);
 
-	}
+	}*/
 }

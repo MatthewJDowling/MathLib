@@ -8,6 +8,7 @@
 #include "Spike.h"
 #include "badGuy.h"
 #include "barriers.h"
+#include "winFlag.h"
 
 class Gamestate
 {
@@ -20,6 +21,8 @@ public:
 	Spike spike[3];
 	BadGuy badguy[3];
 	Barrier barrier[8];
+	Flag flag;
+
 	Grapple grapple; 
 	
 

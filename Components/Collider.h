@@ -9,6 +9,8 @@ public:
 	AABB box;
 	Hull hull;
 
+	unsigned int color;
+
 	Collider();
 
 	Collider(const vec2 *verts, int size);

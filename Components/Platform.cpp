@@ -20,21 +20,7 @@ void Platform::update(float deltaTime, Gamestate & gs)
 void Platform::draw(const mat3 & camera)
 {
 	collider.DebugDraw(camera, transform);
+	collider.color = WHITE;
 }
 
-/*
 
-( . Y . )
-
-8==D
-
-H	H	
-H	H
-HHHHH
-H	H
-H	H	...i give up
-
-
-
-
-*/
