@@ -54,10 +54,11 @@ void PlayerShip::update(float deltaTime, Gamestate & gs, PlayerShip &player)
 		}
 		if (sfw::getKey(' ') && !gs.grapple.isAlive)
 		{
-			//gs.grapple.rigidbody.isGravity = false; 
-			gs.grapple.timer = 1.f;
+			// gs.grapple.rigidbody.isGravity = false; 
+			gs.grapple.timer = 1.0f;
 
-		gs.grapple.transform.m_facing = transform.m_facing - 50.f;
+			gs.grapple.transform.m_position = transform.getGlobalPosition();
+			gs.grapple.transform.m_facing = transform.m_facing - 50.f;
 
 			gs.grapple.rigidbody.velocity = vec2{ 0,0 };
 			gs.grapple.rigidbody.addImpulse(transform.getDirection() * 2000.f);
